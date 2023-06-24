@@ -1,7 +1,6 @@
 
 import sqlite3
 from models import Activity
-from datetime import datetime
 
 def add(activity: Activity):
     # Connect to the SQLite database
@@ -13,12 +12,14 @@ def add(activity: Activity):
                       (id INTEGER PRIMARY KEY AUTOINCREMENT,
                        name TEXT,
                        timestamp INTEGER,
-                       amount INTEGER)''')
+                       amount INTEGER,
+                       user_id INTEGER
+                       )''')
 
     # Insert the activity into the database
-    cursor.execute('''INSERT INTO activities (name, date, amount)
-                      VALUES (?, ?, ?)''',
-                   (activity.name, activity.timestamp, activity.amount))
+    cursor.execute('''INSERT INTO activities (name, timestamp, amount, user_id)
+                      VALUES (?, ?, ?, ?)''',
+                   (activity.name, activity.timestamp, activity.amount, activity.user_id))
     activity_id = cursor.lastrowid
 
     # Commit the changes and close the connection
@@ -27,3 +28,7 @@ def add(activity: Activity):
 
     # Return the ID of the inserted activity
     return activity_id
+
+def get_total_number_of_pushups(user_id: int) -> int:
+    activity_name = "pushups"
+    raise NotImplemented
