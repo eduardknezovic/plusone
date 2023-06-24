@@ -175,3 +175,6 @@ builds/
 *.pyc
 
 -key.json
+
+activities.db
+
