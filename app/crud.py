@@ -1,6 +1,6 @@
 
 import sqlite3
-from models import Activity
+from app.models import Activity
 
 def add(activity: Activity):
     # Connect to the SQLite database

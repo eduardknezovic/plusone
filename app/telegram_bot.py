@@ -1,11 +1,10 @@
-import os
 import telebot
 
-from models import Activity, get_activity_from_telegram_message
-from crud import add
-from service import get_response_for_successful_updating_of_activity
+from app.crud import add
+from app.service import get_response_for_successful_updating_of_activity
+from app.models import Activity, get_activity_from_telegram_message
+from app.config import TELEGRAM_TOKEN
 
-TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
 @bot.message_handler(commands=['start', 'help'])
@@ -28,11 +27,3 @@ def echo_all(message):
 
 def run_telegram_bot():
     bot.polling()
-
-def main():
-    print("Starting telegram bot, press Ctrl+C to stop.")
-    run_telegram_bot()
-    print("Ending telegram bot.")
-
-if __name__ == '__main__':
-    main()

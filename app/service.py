@@ -1,7 +1,7 @@
 
 import random
 
-from models import Activity 
+from app.models import Activity 
 
 def get_response_for_successful_updating_of_activity(activity: Activity) -> str:
     message = "+{} {}!".format(activity.amount, activity.name, activity.user_id)
@@ -9,7 +9,7 @@ def get_response_for_successful_updating_of_activity(activity: Activity) -> str:
     message += get_customized_message(activity)
     return message
 
-def get_customized_message(activity: Activity) -> str:
+def get_customized_message(activity: Activity = None) -> str: # "activity" is an optional parameter
     messages = [
         "Embrace the grind and outwork your competition.",
         "Failure is just a stepping stone on the path to success.",
