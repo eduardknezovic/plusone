@@ -151,6 +151,7 @@ git push --set-upstream origin <branch_name>
 
 By creating a pull request, you’re requesting a review and approving of your changes before they become final.
 
+Add "eduardknezovic" as a reviewer.
+
 After the pull request is approved, the changes will get merged to the main branch, and shortly after that,
 the changes will be deployed to the production server.
-
