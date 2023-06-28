@@ -88,12 +88,53 @@ Then, you can run SQL commands to query the data.
 It's a common practice in the industry to 
 create a new git branch for each feature.
 
+### 0. Making sure you're on a right git branch
+
+To check the current branch, run:
+```
+git branch
+```
+
+It should show the "main" branch.
+
+If it's on some other branch, you can switch to the main branch by running:
+```
+git checkout main
+```
+
+Also, you need to make sure the main branch is up to date with the remote repository.
+
+To do that, run:
+```
+git pull
+```
+
+It will pull the latest changes from the remote repository.
+
+Once that's all covered, you can create a new branch.
+
+### 1. Creating a new branch
+
 Creating a new branch:
 ```
 git checkout -b <branch_name>
 ```
 
 (Branch name can be a short description of the feature ie. "add-pushup-command")
+
+### 2. Making changes
+
+Once you're on the new branch, you can make changes to the code.
+
+To save changes, you need to "commit" them.
+
+To commit the changes, run:
+```
+git add . # Adds all the changes to the commit
+git commit -m "Your commit message" 
+```
+
+### 3. Pushing the changes to the repository
 
 After the feature is completed, it's pushed to the remote repository,
 using the command:
@@ -106,11 +147,11 @@ When pushing for the first time, you will be asked to set the upstream branch, l
 git push --set-upstream origin <branch_name>
 ```
 
-After the branch is pushed, create a pull request on github.
+### 4. Create a GitHub pull request
 
-By creating a pull request, you’re requesting that someone reviews and approves your changes before they become final.
+By creating a pull request, you’re requesting a review and approving of your changes before they become final.
+
+Add "eduardknezovic" as a reviewer.
 
 After the pull request is approved, the changes will get merged to the main branch, and shortly after that,
 the changes will be deployed to the production server.
-
-
