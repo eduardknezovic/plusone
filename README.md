@@ -88,6 +88,10 @@ Then, you can run SQL commands to query the data.
 It's a common practice in the industry to 
 create a new git branch for each feature.
 
+First, make sure you're on a right branch.
+
+
+
 Creating a new branch:
 ```
 git checkout -b <branch_name>
