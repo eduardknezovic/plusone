@@ -83,4 +83,34 @@ sqlite3 activities.db
 
 Then, you can run SQL commands to query the data.
 
+## The workflow
+
+It's a common practice in the industry to 
+create a new git branch for each feature.
+
+Creating a new branch:
+```
+git checkout -b <branch_name>
+```
+
+(Branch name can be a short description of the feature ie. "add-pushup-command")
+
+After the feature is completed, it's pushed to the remote repository,
+using the command:
+```
+git push
+```
+
+When pushing for the first time, you will be asked to set the upstream branch, like so:
+```
+git push --set-upstream origin <branch_name>
+```
+
+After the branch is pushed, create a pull request on github.
+
+By creating a pull request, you’re requesting that someone reviews and approves your changes before they become final.
+
+After the pull request is approved, the changes will get merged to the main branch, and shortly after that,
+the changes will be deployed to the production server.
+
 
