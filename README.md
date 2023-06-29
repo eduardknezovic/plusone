@@ -83,12 +83,26 @@ sqlite3 activities.db
 
 Then, you can run SQL commands to query the data.
 
-## The workflow
+## The dev workflow
+
+### Task selection
+
+The list of tasks is available here: https://trello.com/b/pL5FfrOi/plusone
+
+When you're ready to start working on a task, assign it to yourself (if it's not assigned already) 
+and move it to the "In Progress" column.
+
+### Git workflow
 
 It's a common practice in the industry to 
 create a new git branch for each feature.
 
-### 0. Making sure you're on a right git branch
+Once the feature gets finished and approved, it
+gets merged to the main branch.
+
+The steps are as follows:
+
+### Making sure you're on a right git branch
 
 To check the current branch, run:
 ```
