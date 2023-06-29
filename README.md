@@ -199,8 +199,44 @@ Steps:
 - Click on the "New pull request" button
 - Select the branch that you want to merge to the main branch (compare: <branch_name>)
 - Click on the "Create pull request" button
+- Add "eduardknezovic" as a reviewer, optionally edit title and description
+- Click on the "Create pull request" button
 
-Add "eduardknezovic" as a reviewer.
+Feel free to move the ticket to the "Review" column on the Trello board!
+
+### 6. Code review
+
+The reviewer will review the code and leave comments if necessary.
+
+In case there's a need to change something, the author of the pull request will make the changes and push them to the same branch. 
+
+The feature branch that's being worked on, might be out of date.
+
+To update the branch, run:
+```
+git checkout main # Switch to the main branch
+git pull # Pull the latest changes from the remote repository
+git checkout <branch_name> # Switch back to the feature branch
+git rebase main # Rebase the feature branch on top of the main branch
+```
+
+Once that's done, you can update the code on your feature branch.
+
+Re-iterating, the steps are:
+```
+git add .
+git commit -m "Your commit message"
+git push
+```
+
+After the latest changes are pushed, feel free to notify the
+reviewer on slack!
+
+### 7. Changes approved!
+
+Currently, the responsibility of eduardknezovic.
 
 After the pull request is approved, the changes will get merged to the main branch, and shortly after that,
-the changes will be deployed to the production server.
+the changes will be deployed to the production server - 
+ready and available for all of the app's users!
+
