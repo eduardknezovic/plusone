@@ -59,14 +59,26 @@ python main.py
 If set up correctly, you will be able to send a 
 "/pushups 10" message to bot, and it will respond accordingly.
 
-## Unit testing
+## Testing
 
-pytest is used for unit testing. It's already included in the requirements.txt file.
+pytest is used for unit/integration testing. It's already included in the requirements.txt file.
 
 To run the unit tests, run this command from the current folder:
 
 ```bash
-pytest test.py
+pytest tests
+```
+
+Or, to run a specific test file, run:
+
+```bash
+pytest tests/test_basic.py
+```
+
+You can even take it a step further and run a specific test:
+
+```bash
+pytest tests/test_basic.py::test_basic
 ```
 
 ## Database
