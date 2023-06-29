@@ -85,24 +85,30 @@ Then, you can run SQL commands to query the data.
 
 ## The dev workflow
 
-### Task selection
+### 1. The task 
+
+First step is to determine the task/feature that will be worked on.
 
 The list of tasks is available here: https://trello.com/b/pL5FfrOi/plusone
+
+If there's something interesting that you'd like to do, feel free to create 
+your own ticket!
 
 When you're ready to start working on a task, assign it to yourself (if it's not assigned already) 
 and move it to the "In Progress" column.
 
-### Git workflow
+**The most important step in software development**: *Before starting coding, make sure you fully understand the requirements*
 
-It's a common practice in the industry to 
-create a new git branch for each feature.
+If there is something off or unclear, do not hesitate to reach out and start a discussion.
 
-Once the feature gets finished and approved, it
-gets merged to the main branch.
+It is possible that the author of the task has missed something, or that the task is just isn't well defined.
 
-The steps are as follows:
+To re-iterate: this is the most important step in the whole dev process. 
 
-### Making sure you're on a right git branch
+If something goes wrong here, all of the work that follows will be in vain. Not only in vain, but it might even be harmful to
+the project.
+
+### 2. Make sure your local repository is up to date
 
 To check the current branch, run:
 ```
@@ -125,18 +131,31 @@ git pull
 
 It will pull the latest changes from the remote repository.
 
-Once that's all covered, you can create a new branch.
+After you've ensured that you have the latest version of the repository, you can create a new branch.
 
-### 1. Creating a new branch
+### 3. Creating a new feature branch
+
+It's a common practice in the industry to 
+create a new git branch for each feature.
+
+It allows for easier version control and code review. 
+
+Very useful, even for small teams.
 
 Creating a new branch:
 ```
-git checkout -b <branch_name>
+git branch <branch_name> # Creates a new branch
+git checkout <branch_name> # Switches to the new branch
+```
+
+Or, you can do it in one step:
+```
+git checkout -b <branch_name> # Same as the above, two commands in one!
 ```
 
 (Branch name can be a short description of the feature ie. "add-pushup-command")
 
-### 2. Making changes
+### 3. Making changes
 
 Once you're on the new branch, you can make changes to the code.
 
@@ -148,7 +167,14 @@ git add . # Adds all the changes to the commit
 git commit -m "Your commit message" 
 ```
 
-### 3. Pushing the changes to the repository
+If you want to check whether you've successfully committed the changes, run:
+```
+git log
+```
+
+It will show the list of commits, with the most recent (hopefully, yours) commit on top.
+
+### 4. Pushing the changes to the repository
 
 After the feature is completed, it's pushed to the remote repository,
 using the command:
@@ -161,7 +187,9 @@ When pushing for the first time, you will be asked to set the upstream branch, l
 git push --set-upstream origin <branch_name>
 ```
 
-### 4. Create a GitHub pull request
+Now, your changes are available on the remote repository.
+
+### 5. Create a GitHub pull request (code review)
 
 By creating a pull request, you’re requesting a review and approving of your changes before they become final.
 
