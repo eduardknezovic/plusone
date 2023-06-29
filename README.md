@@ -193,6 +193,12 @@ Now, your changes are available on the remote repository.
 
 By creating a pull request, you’re requesting a review and approving of your changes before they become final.
 
+Steps:
+- Go to the repository page on GitHub (https://github.com/eduardknezovic/plusone)
+- Click on the "Pull requests" tab
+- Click on the "New pull request" button
+- Select the branch that you want to merge to the main branch (compare: <branch_name>)
+
 Add "eduardknezovic" as a reviewer.
 
 After the pull request is approved, the changes will get merged to the main branch, and shortly after that,
