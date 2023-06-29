@@ -198,6 +198,7 @@ Steps:
 - Click on the "Pull requests" tab
 - Click on the "New pull request" button
 - Select the branch that you want to merge to the main branch (compare: <branch_name>)
+- Click on the "Create pull request" button
 
 Add "eduardknezovic" as a reviewer.
 
