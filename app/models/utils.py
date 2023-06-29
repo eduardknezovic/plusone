@@ -1,13 +1,8 @@
 
-from pydantic import BaseModel
+from app.models.telegram import Message
+from app.models.activity import Activity
 
-class Activity(BaseModel):
-    user_id: int
-    name: str
-    amount: int
-    timestamp: int
-
-def get_activity_from_telegram_message(message):
+def get_activity_from_telegram_message(message: Message) -> Activity:
     command_parts = message.text.split()
     if len(command_parts) == 2:
         name = command_parts[0][1:]  # Remove the slash "/" character
@@ -17,4 +12,4 @@ def get_activity_from_telegram_message(message):
             name = "pushups" # Standardize the activity name
         return Activity(user_id=user_id, name=name, amount=amount, timestamp=message.date)
     else:
-        return None
+        return None # TODO: Raise an exception instead of returning None, the exception should be caught in telegram_bot.py
