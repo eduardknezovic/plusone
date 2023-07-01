@@ -1,3 +1,4 @@
+import random
 
 from typing import List
 
@@ -21,6 +22,7 @@ def get_activity_sum(user_id: int, activity_name: str) -> int:
     return total
 
 def get_customized_message(activity: Activity = None) -> str: # "activity" is an optional parameter
+    inp = random.randint(0,7)
     messages = [
         "Embrace the grind and outwork your competition.",
         "Failure is just a stepping stone on the path to success.",
@@ -31,4 +33,4 @@ def get_customized_message(activity: Activity = None) -> str: # "activity" is an
         "Your mindset determines your outcome; cultivate a winning mentality.",
         "Rise above the noise and negativity; focus on your goals and let nothing stop you."
     ]
-    return messages[0]
+    return messages[inp]

@@ -8,5 +8,5 @@ If there's no OS environment variable TELEGRAM_TOKEN, the code will use the hard
 For now, you can just replace the hardcoded string with your token and it will work fine.
 """
 
-TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN', "Enter your telegram token here.")
+TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN', '5902673161:AAELLa1_6i1i8uMg4CkOAuyZu9C5J_iM0U8')
 
