@@ -1,3 +1,4 @@
+import random
 
 from typing import List
 
@@ -31,4 +32,5 @@ def get_customized_message(activity: Activity = None) -> str: # "activity" is an
         "Your mindset determines your outcome; cultivate a winning mentality.",
         "Rise above the noise and negativity; focus on your goals and let nothing stop you."
     ]
-    return messages[0]
+    inp = random.randint(0,int(len(messages) - 1))
+    return messages[inp]
