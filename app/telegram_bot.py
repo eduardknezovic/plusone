@@ -23,6 +23,17 @@ def send_response(message: Message):
         response: str = "Invalid format. Please use '/pushup [amount]'."
     bot.reply_to(message, response)
 
+@bot.message_handler(commands=['check_status'])
+def check_status(message):
+    user_id = message.from_user.id
+    user = bot.get_chat_member(message.chat.id, user_id)
+
+    bot.reply_to(message, user.status)
+    # if user.status == 'online':
+    #     bot.reply_to(message, 'User is online')
+    # else:
+    #     bot.reply_to(message, 'User is offline')
+
 @bot.message_handler(func=lambda m: True)
 def echo_all(message: Message):
     bot.reply_to(message, message.text)
