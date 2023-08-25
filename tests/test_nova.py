@@ -6,6 +6,7 @@ from nova.app import filter_extracted_text, extract_data
 def test_filtering():
     assert filter_extracted_text("+2.03") == "+2.03"
     assert filter_extracted_text("-2.23") == "-2.23"
+    assert filter_extracted_text("-2..24") == "-2.24"
     # TODO add more tests 
 
 def test_image_extraction():

@@ -52,6 +52,7 @@ def filter_extracted_text(extracted_text):
     extracted_text = extracted_text.replace("+2..", "+2.")
     extracted_text = extracted_text.replace("-2", "-2.")
     extracted_text = extracted_text.replace("-2..", "-2.")
+    extracted_text = extracted_text.replace("-2..", "-2.")
 
     extracted_text = extracted_text[:5]
     
@@ -88,6 +89,7 @@ def extract_data(image):
         
         # Perform OCR on the cropped image region
         extracted_text = pytesseract.image_to_string(cropped_image, config='--psm 6').strip()
+
         
         # Handle missing - sing
         if idx == 1 or idx == 2:
