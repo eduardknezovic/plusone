@@ -53,10 +53,6 @@ def filter_extracted_text(extracted_text):
     extracted_text = extracted_text.replace("-2", "-2.")
     extracted_text = extracted_text.replace("-2..", "-2.")
 
-    first_character = extracted_text[0]
-    if first_character not in ["+", "-", "0"]:
-        raise ValueError(f"Unexpected first character: {first_character}")
-
     extracted_text = extracted_text[:5]
     
     return extracted_text
