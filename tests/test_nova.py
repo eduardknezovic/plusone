@@ -9,10 +9,14 @@ def test_filtering():
     # TODO add more tests 
 
 def test_image_extraction():
+    # ARRANGE
     image_file_path = "nova/data/IVANCAN_FILIP_OS_11052022_095746_Large Map.JPG"
     image = Image.open(image_file_path)
+
+    # ACT
     data = extract_data(image)
 
+    # ASSERT
     assert data["eye"] == "Left"
     assert data["pupil_center_x"] == 0.03
     assert data["pupil_center_y"] == -0.07
@@ -27,4 +31,5 @@ def test_image_extraction():
     # -------
     # TODO after the tests above are passing, copy and paste code above
     # to write more tests for another images
+
 

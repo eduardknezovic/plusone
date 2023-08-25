@@ -33,6 +33,8 @@ app.layout = html.Div([
 
 def filter_extracted_text(extracted_text):
     # Handle text recognition common errors
+    print("BEFORE FILTERING: ")
+    print(extracted_text)
     extracted_text = extracted_text.replace("p", "")
     extracted_text = extracted_text.replace("u", "")
     extracted_text = extracted_text.replace("m", "")
@@ -51,9 +53,11 @@ def filter_extracted_text(extracted_text):
     extracted_text = extracted_text.replace("-2", "-2.")
     extracted_text = extracted_text.replace("-2..", "-2.")
 
-    # Hande the occuring of additional . error
-    if len(extracted_text) > 5:
-        extracted_text = extracted_text[:-1]
+    first_character = extracted_text[0]
+    if first_character not in ["+", "-", "0"]:
+        raise ValueError(f"Unexpected first character: {first_character}")
+
+    extracted_text = extracted_text[:5]
     
     return extracted_text
 
