@@ -31,9 +31,33 @@ app.layout = html.Div([
     html.Div(id='output-image'),
 ])
 
+def filter_extracted_text(extracted_text):
+    # Handle text recognition common errors
+    extracted_text = extracted_text.replace("p", "")
+    extracted_text = extracted_text.replace("u", "")
+    extracted_text = extracted_text.replace("m", "")
+    extracted_text = extracted_text.replace("o", "0")
+    extracted_text = extracted_text.replace("O", "0")
+    extracted_text = extracted_text.replace("+0", "+0.")
+    extracted_text = extracted_text.replace("+0..", "+0.")
+    extracted_text = extracted_text.replace("-0", "-0.")
+    extracted_text = extracted_text.replace("-0..", "-0.")
+    extracted_text = extracted_text.replace("+1", "+1.")
+    extracted_text = extracted_text.replace("+1..", "+1.")
+    extracted_text = extracted_text.replace("-1", "-1.")
+    extracted_text = extracted_text.replace("-1..", "-1.")
+    extracted_text = extracted_text.replace("+2", "+2.")
+    extracted_text = extracted_text.replace("+2..", "+2.")
+    extracted_text = extracted_text.replace("-2", "-2.")
+    extracted_text = extracted_text.replace("-2..", "-2.")
+
+    # Hande the occuring of additional . error
+    if len(extracted_text) > 5:
+        extracted_text = extracted_text[:-1]
+    
+    return extracted_text
+
 def extract_data(image):
-    content_type, content_string = image.split(',')
-    pil_image = Image.open(io.BytesIO(base64.b64decode(content_string)))
 
     crop_coordinates_list = [
         (281,367,359,381),  # Crop 1 coordinates
@@ -60,7 +84,7 @@ def extract_data(image):
     ]
 
     for idx, crop_coordinates in enumerate(crop_coordinates_list):
-        cropped_image = pil_image.crop(crop_coordinates)
+        cropped_image = image.crop(crop_coordinates)
         
         # Perform OCR on the cropped image region
         extracted_text = pytesseract.image_to_string(cropped_image, config='--psm 6').strip()
@@ -70,28 +94,7 @@ def extract_data(image):
             if '+' not in extracted_text:
                 extracted_text = '-' + extracted_text
 
-        # Handle text recognition common errors
-        extracted_text = extracted_text.replace("p", "")
-        extracted_text = extracted_text.replace("u", "")
-        extracted_text = extracted_text.replace("m", "")
-        extracted_text = extracted_text.replace("o", "0")
-        extracted_text = extracted_text.replace("O", "0")
-        extracted_text = extracted_text.replace("+0", "+0.")
-        extracted_text = extracted_text.replace("+0..", "+0.")
-        extracted_text = extracted_text.replace("-0", "-0.")
-        extracted_text = extracted_text.replace("-0..", "-0.")
-        extracted_text = extracted_text.replace("+1", "+1.")
-        extracted_text = extracted_text.replace("+1..", "+1.")
-        extracted_text = extracted_text.replace("-1", "-1.")
-        extracted_text = extracted_text.replace("-1..", "-1.")
-        extracted_text = extracted_text.replace("+2", "+2.")
-        extracted_text = extracted_text.replace("+2..", "+2.")
-        extracted_text = extracted_text.replace("-2", "-2.")
-        extracted_text = extracted_text.replace("-2..", "-2.")
-
-        # Hande the occuring of additional . error
-        if len(extracted_text) > 5:
-            extracted_text = extracted_text[:-1]
+        extracted_text = filter_extracted_text(extracted_text)
 
         # Use the key to label the values and make them the right type
         if idx == 0:
@@ -103,8 +106,12 @@ def extract_data(image):
             extracted_value2 = float(extracted_text)
             extracted_data[idx + 1] = f"{keys[idx]} {extracted_value2:.2f}"
 
-    new_image = f"{content_type},{content_string}"
-    return extracted_data, new_image
+    return extracted_data
+
+def crop_output_image(image):
+    crop_coordinates = (682, 440, 1389, 1160)
+    cropped_image = image.crop(crop_coordinates)
+    return cropped_image
 
 # Decode and display the uploaded image
 @app.callback(
@@ -116,12 +123,13 @@ def update_output(image):
     if image is None:
         return [], [] # Return nothing
     
-    data, cropped_image = extract_data(image)
+
+    content_type, content_string = image.split(',')
+    image = Image.open(io.BytesIO(base64.b64decode(content_string)))
+    data = extract_data(image)
+    cropped_image = crop_output_image(image)
     
     # Crop the image
-    decoded_image = Image.open(io.BytesIO(base64.b64decode(cropped_image.split(',')[1])))
-    crop_coordinates = (682, 440, 1389, 1160)
-    cropped_image = decoded_image.crop(crop_coordinates)
 
     img_element = html.Img(src=cropped_image, style={'max-width': '100%'})
 
