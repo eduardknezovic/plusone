@@ -35,7 +35,7 @@ app.layout = html.Div([
 # Handling of exceptions with replacements
 def filter_extracted_text(extracted_text):
     
-    # Needed replacements for correcting the text regognition errors
+    # Needed replacements to correct the text regognition errors
     replacements = {
     "p": "",
     "u": "",
@@ -44,12 +44,12 @@ def filter_extracted_text(extracted_text):
     "O": "0",
     "‘": "",
     "“": "",
-    r"\+(\d)": r"+\1.",     # Handle missing dot on plus
-    r"-(\d)": r"-\1.",      # Handle missing dot on minus
-    r"(\d)\.\.": r"\1.",    # Handle tow dots ..
-    r"\.(\.+)": r"\1",      # Handle any additinal dots
-    r"(\d+)\.(\d+)\.(\d+)": r"\1.\2\3",
-    r"(\d+)\.\.{2,}(\d+)": r"\1.\2"
+    r"\+(\d)": r"+\1.",                     # Handle missing dot on plus
+    r"-(\d)": r"-\1.",                      # Handle missing dot on minus
+    r"(\d)\.\.": r"\1.",                    # Handle tow dots ..
+    r"\.(\.+)": r"\1",                      # Handle any additinal dots
+    r"(\d+)\.(\d+)\.(\d+)": r"\1.\2\3",     # Handle any additinal dots
+    r"(\d+)\.\.{2,}(\d+)": r"\1.\2"         # Handle any additinal dots
     }
 
     # Additional replacement to keep only the first dot after the first character
@@ -78,10 +78,10 @@ def extract_data(image):
         "thinnest_local_thickness": (156,968,224,983),   # Crop 7  coordinates
         "pupil_diameter":           (302,1104,357,1119), # Crop 8  coordinates
         "k_max_x":                  (259,999,295,1015),  # Crop 9  coordinates
-        "k_max_y":                  (319,999,357,1014)  # Crop 10 coordinates
+        "k_max_y":                  (319,999,357,1014)   # Crop 10 coordinates
     }
 
-    # dict to store the data extracted
+    # Dict to store the data extracted
     extracted_data = {}
 
     for idx, crop_coordinates in enumerate(crop_coordinates_dict.values()):
@@ -91,13 +91,9 @@ def extract_data(image):
         extracted_text = pytesseract.image_to_string(cropped_image, config='--psm 6').strip()
         
         # Handle missing - sing
-        if idx == 1 or idx == 2 or idx == 8 or idx == 9:
-            if '-' in extracted_text:
-                extracted_text = extracted_text
-            elif '+' not in extracted_text:
-                if extracted_text == 0.00 or 0.0:
-                    extracted_text = extracted_text
-                else:
+        if idx in [1, 2, 8, 9]:
+            if '-' not in extracted_text and '+' not in extracted_text:
+                if extracted_text != "0.00" and extracted_text != "0.0":
                     extracted_text = '-' + extracted_text
 
         extracted_text = filter_extracted_text(extracted_text)
