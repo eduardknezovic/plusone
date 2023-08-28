@@ -24,6 +24,7 @@ def test_filtering():
     assert filter_extracted_text("487 b") == "487"
     assert filter_extracted_text("407  z") == "407"
     assert filter_extracted_text("377 vxq") == "377"
+    assert filter_extracted_text("-‘014") == "-0.14"
 
 #1
 def test_image_extraction():
