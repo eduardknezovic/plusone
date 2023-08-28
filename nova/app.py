@@ -37,8 +37,13 @@ def filter_extracted_text(extracted_text):
 
     # Needed replacements to correct the text regognition errors
     replacements = {
-    r"o": "0",
-    r"O": "0",
+    "p": "",
+    "u": "",
+    "m": "",
+    "o": "0",
+    "O": "0",
+    "‘": "",
+    "“": "",
     r"\+(\d)": r"+\1.",                     # Handle missing dot on plus
     r"-(\d)": r"-\1.",                      # Handle missing dot on minus
     r"(\d)\.\.": r"\1.",                    # Handle tow dots ..
