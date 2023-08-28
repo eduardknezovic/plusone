@@ -25,7 +25,7 @@ def test_filtering():
     assert filter_extracted_text("407  z") == "407"
     assert filter_extracted_text("377 vxq") == "377"
 
-#1 Done
+#1
 def test_image_extraction():
     # ARRANGE
     image_file_path = "nova/data/IVANCAN_FILIP_OS_11052022_095746_Large Map.JPG" 
@@ -46,7 +46,7 @@ def test_image_extraction():
     assert data["k_max_x"] == -0.40
     assert data["k_max_y"] == -0.20
 
-#2 Done
+#2 
 def test_image_extraction():
     # ARRANGE
     image_file_path = "nova/data/KOSTAJNSEK_ALEKSANDER_OS_12042023_131142_Large Map.JPG" 
@@ -67,7 +67,7 @@ def test_image_extraction():
     assert data["k_max_x"] == -0.14
     assert data["k_max_y"] == -2.67
 
-#3 Done
+#3 
 def test_image_extraction():
     # ARRANGE
     image_file_path = "nova/data/NOVAK_MATHIAS_OS_25032023_111050_Large Map.JPG" 
@@ -89,7 +89,7 @@ def test_image_extraction():
     assert data["k_max_y"] == -0.80
 
 
-#4 Done
+#4 
 def test_image_extraction():
     # ARRANGE
     image_file_path = "nova/data/PENTEK_TIN_OD_17052023_145610_Large Map.JPG" 
@@ -110,7 +110,7 @@ def test_image_extraction():
     assert data["k_max_x"] == 0.08
     assert data["k_max_y"] == -0.31
 
-#5 Done
+#5 
 def test_image_extraction():
     # ARRANGE
     image_file_path = "nova/data/PETREA_NARCIS DANIEL_OD_12062023_115031_Large Map.JPG" 

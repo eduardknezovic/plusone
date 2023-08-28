@@ -34,22 +34,16 @@ app.layout = html.Div([
 
 # Handling of exceptions with replacements
 def filter_extracted_text(extracted_text):
-    
+
     # Needed replacements to correct the text regognition errors
     replacements = {
-    "p": "",
-    "u": "",
-    "m": "",
-    "o": "0",
-    "O": "0",
-    "‘": "",
-    "“": "",
+    r"o": "0",
+    r"O": "0",
     r"\+(\d)": r"+\1.",                     # Handle missing dot on plus
     r"-(\d)": r"-\1.",                      # Handle missing dot on minus
     r"(\d)\.\.": r"\1.",                    # Handle tow dots ..
     r"\.(\.+)": r"\1",                      # Handle any additinal dots
-    r"(\d+)\.(\d+)\.(\d+)": r"\1.\2\3",     # Handle any additinal dots
-    r"(\d+)\.\.{2,}(\d+)": r"\1.\2"         # Handle any additinal dots
+    r"(\d+)\.(\d+)\.(\d+)": r"\1.\2\3"      # Handle any additinal dots
     }
 
     # Additional replacement to keep only the first dot after the first character
@@ -62,6 +56,10 @@ def filter_extracted_text(extracted_text):
     # Hande the occuring of additional char at end error
     if len(extracted_text) > 5:
         extracted_text = extracted_text[:-1]
+
+    # Delete everything that is not supposed to be there
+    allowed_chars = "+-.0123456789"
+    extracted_text = ''.join(char for char in extracted_text if char in allowed_chars)
     
     return extracted_text
 
@@ -95,8 +93,10 @@ def extract_data(image):
             if '-' not in extracted_text and '+' not in extracted_text:
                 if extracted_text != "0.00" and extracted_text != "0.0":
                     extracted_text = '-' + extracted_text
-
-        extracted_text = filter_extracted_text(extracted_text)
+        
+        # Leave the first value as it is
+        if idx != 0:
+            extracted_text = filter_extracted_text(extracted_text)
 
         # Convert to right type
         key_at_idx = list(crop_coordinates_dict.keys())[idx]
