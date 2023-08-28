@@ -11,6 +11,14 @@ def test_filtering():
     assert filter_extracted_text("-2..2.4") == "-2.24"
     assert filter_extracted_text("-2...24.") == "-2.24"
     assert filter_extracted_text("-2...24.") == "-2.24"
+    assert filter_extracted_text("6..24") == "6.24"
+    assert filter_extracted_text("-6..2.4") == "-6.24"
+    assert filter_extracted_text("-6...24.") == "-6.24"
+    assert filter_extracted_text("-6...24.") == "-6.24"
+    assert filter_extracted_text("9..24") == "9.24"
+    assert filter_extracted_text("-9..2.4") == "-9.24"
+    assert filter_extracted_text("-9...24.") == "-9.24"
+    assert filter_extracted_text("-9...24.") == "-9.24"
 
 #1 Done
 def test_image_extraction():
