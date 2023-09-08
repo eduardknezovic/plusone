@@ -177,4 +177,5 @@ builds/
 -key.json
 
 activities.db
+.terraform/
 
